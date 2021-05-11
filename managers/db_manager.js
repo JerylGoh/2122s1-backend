@@ -1,3 +1,11 @@
+//Request
+//db manager will then send a sql query to database and sql query is excuted
+
+//Response
+//db manager receives the response from database and sends the response back to queue/stats manager
+//remember the response sent back from db for select queries is what you select, the response sent back from
+//insert, update and delete queries are things like affected rows and other informaion
+
 const { getPool } = require('../database/database');
 
 const pool = getPool();

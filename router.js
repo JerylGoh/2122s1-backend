@@ -1,3 +1,7 @@
+//Request
+//The request user makes will come by the router, then router will pass/'route' it to queue/stats route based on the path, e.g /queue or /stats 
+//of the request
+
 const cors = require('cors');
 
 const statsManager = require('./managers/stats_manager');
@@ -10,7 +14,10 @@ const { ERROR_CODE, ...errors } = require('./errors');
 // CORS
 app.use(cors());
 
+//this redirects any queue request to queueRoute (enqueue and dequeue)
 app.use('/queue', queueRoute);
+
+//this redirects any stats request to statsRoute (error)
 app.use('/stats', statsRoute);
 
 // 404

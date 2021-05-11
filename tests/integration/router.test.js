@@ -1,8 +1,15 @@
+//Integration test is done on db manager to test its connection with database. However, testing is independent and should not depend on the real
+//database, so the idea is to not connect with the real database db but the test database db-test.
+
+
 const { it, run } = require('../test_driver');
 const { Client } = require('pg');
 const { now } = require('../../utils');
 const { DATE_FORMAT } = require('../../commons');
 const database = require('../../database/database');
+
+//We will patch the database.js file such that it connects to db-test instead of db.
+
 const client = new Client({
     host: process.env.DB_HOST,
     port: process.env.DB_TEST_PORT, // DB_TEST_PORT instead of DB_PORT

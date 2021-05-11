@@ -1,3 +1,9 @@
+//Request
+//Stats manager will call the relevant functions inside db manager
+
+//Response
+//Stats manager receives data from db manager and prepares the response body and passes it to stats route
+
 const utils = require('../utils');
 const databaseManager = require('./db_manager');
 

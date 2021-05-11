@@ -1,0 +1,127 @@
+database -> database.js -> db_manager.js -> queue_manager.js -> queue_route.js -> router.js -> app.js
+
+
+database
+- database.js:
+  Establishes the connection between the application and database by requiring postGres which is an interface to connect both sides.
+  To establish a connection with the database, information about the database needs to be specified -> done so programatically inside
+  the commons.js file by extracting constants from the .env file.
+  There are 2 methods of establishing a connection with the database, using pool or client, in this case, we will be using pool, require
+  pool inside database.js after installing postgres. Also, require the commons.js file which will be used to specify the information about 
+  the database in order to establish a connection with the database
+  
+- init.sql:
+  contains sql commands to create the database and tables
+
+managers
+- db_manager.js:
+  after you have settled database.js and commons.js which is responsible for establishing a connection 
+  with the database, you can now establish methods to interact with the database
+
+
+- queue_manager.js:
+  promise chained from db_manager.js and returns a json object w/ the result from the .then() in db_manager.js
+
+routes
+- queue_route.js:
+  contains the endpoints. request from client is received here, mf in endpoints get run and calls enqueue function gets run and the resolve
+  result which the promise returns is returned back to the endpoint, .then to handle success and .catch to handle error
+
+tests/http
+- enqueue-dequeue.test.http:
+
+app.js:
+- require express and http, export them
+
+commons.js:
+Since these values are constants (unchanging throughout the app's lifecycle), let us create them in a `commons` file. 
+Create a file `commons.js` in the root directory and enter the following values:
+Note that we are still referencing data from the environment, thus we need to load the values in the `
+.env` file into the environment. We will use the `dotenv` npm package to assist us with loading environment
+variable. require dotenv inside common.js
+
+docker-compose.yml: 
+Tells docker to put the database/init.sql file into the countainer .The 
+docker image will then execute this file during the initialisation of
+the database, hence creating the database and table.
+
+.env:
+environment file which contains all the information about the database
+
+errors.js:
+
+router.js:
+
+www.js:
+
+test.js:
+
+queue_tab:
+the table to be created with the attributes
+
+
+commands:
+
+main:
+
+npm run start-db(to start the database)
+
+npm start(to start the backend)
+
+node(to start a node terminal to execute js code outside the browser)
+
+.editor(to open up the editor for js codes inside node terminal, copy any code and right click to paste ctrl d to execute code, ctrl c to proceed after ctrl d)
+
+node ./tests/unit/managers/queue_manager.test.js (to run unit test for queue manager)
+
+node ./tests/unit/managers/stats_manager.test.js (to run unit test for stats manager)
+
+node .\tests\integration\router.test.js (to run integration test for db manager)
+
+notes:
+front-end:
+enqueue-dequeue.test.http
+
+back-end:
+www.js
+
+database:
+docker stores the init.sql file in one of the docker's container's directories, database is created when docker image runs the init.sql file
+
+
+testing:
+
+Unit Testing:
+In Software Development Life Cycle, normally software application does not developed by a single developer. 
+The software application is divided into different modules and modules are allocated to different development 
+teams. When a module is developed by developer and it is tested for functionality then it is known as Unit testing.
+
+Integration Testing:
+Once all modules are developed and integrated with other modules then Integration testing is to be carried out to 
+discover the issues arise when different modules are interacting with each other to build overall system.
+
+Boundary Value Analysis:
+Boundary testing is the process of testing between extreme ends or boundaries between partitions of the input values.
+
+So these extreme ends like Start- End, Lower- Upper, Maximum-Minimum, Just Inside-Just Outside values are called boundary 
+values and the testing is called "boundary testing". The basic idea in normal boundary value testing is to select input 
+variable values at their:
+
+Minimum
+Just above the minimum
+A nominal value
+Just below the maximum
+Maximum
+
+In Boundary Testing, Equivalence Class Partitioning plays a good role
+Boundary Testing comes after the Equivalence Class Partitioning.
+
+Equivalence Partition:
+Equivalence Partitioning or Equivalence Class Partitioning is type of black box testing technique which can be applied to 
+all levels of software testing like unit, integration, system, etc. In this technique, input data units are divided into 
+equivalent partitions that can be used to derive test cases which reduces time required for testing because of small number of test cases.
+
+Conclusion:
+BVA is better than EP and comes after EP. This is while EP only considers any value between a single partition(if that value succeeds, it is
+deemed successful), BVA considers the min, just above min, normal, just below max and max values of a single partition.
+
